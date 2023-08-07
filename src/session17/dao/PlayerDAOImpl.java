@@ -181,4 +181,36 @@ public class PlayerDAOImpl implements PlayerDAO {
         }
         return listPlayer;
     }
+
+    @Override
+    public List<Player> getPlayersByName(String playerName) {
+        List<Player> listPlayer = new ArrayList<>();
+        Connection conn;
+        PreparedStatement ps;
+        ResultSet rs;
+
+        conn = DBUtility.openConnection();
+        try {
+            ps = conn.prepareStatement("select * from tbl_players where playerName like ?");
+            ps.setString(1, "%" + playerName + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Player player = new Player();
+                player.setPlayerId(rs.getInt("playerId"));
+                player.setPlayerName(rs.getString("playerName"));
+                player.setGender(rs.getBoolean("gender"));
+                player.setDateOfBirth(rs.getDate("dateOfBirth"));
+                player.setNationality(rs.getString("nationality"));
+                player.setClubName(rs.getString("clubName"));
+                player.setPositionPlay(rs.getString("positionPlay"));
+                player.setTransferCost(rs.getFloat("transferCost"));
+                listPlayer.add(player);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DBUtility.closeConnection(conn);
+        }
+        return listPlayer;
+    }
 }

@@ -16,4 +16,5 @@ public interface PlayerDAO {
     public boolean removePlayer(Integer id);
 
     public List<Player> getPlayersByClub(String clubName);
+    public List<Player> getPlayersByName(String playerName);
 }
