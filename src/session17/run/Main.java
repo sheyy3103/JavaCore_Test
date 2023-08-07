@@ -66,7 +66,7 @@ public class Main {
                     System.out.print("Nhập tên câu lạc bộ: ");
                     clubName = sc.nextLine();
                     List<Player> listPlayer = new PlayerDAOImpl().getPlayersByClub(clubName);
-                    System.out.println("Thông tin của tất cả cầu thủ câu lạc bộ " + clubName + ": ");
+                    System.out.println("Thông tin của tất cả cầu thủ thuộc câu lạc bộ " + clubName + ": ");
                     for (Player player : listPlayer) {
                         System.out.println("- Cầu thủ: ");
                         player.displayData();
@@ -87,6 +87,7 @@ public class Main {
                 default -> {
                 }
             }
+            System.out.println();
         }
     }
 
