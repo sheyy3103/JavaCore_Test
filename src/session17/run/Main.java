@@ -101,6 +101,6 @@ public class Main {
         System.out.println("6. Tìm kiếm thông tin cầu thủ theo câu lạc bộ.");
         System.out.println("7. Tìm kiếm thông tin cầu thủ theo tên.");
         System.out.println("8. Thoát.");
-        System.out.print("Vui lòng chọn từ 1 đến 8: ");
+        System.out.print("Vui lòng chọn số từ 1 đến 8: ");
     }
 }

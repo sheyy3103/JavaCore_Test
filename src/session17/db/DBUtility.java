@@ -9,7 +9,7 @@ public class DBUtility {
         Connection conn;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=DB_TEST1_JavaCore_C2110H1", "sheyy", "sheyy3103");
+            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=DB_TEST1_JavaCore_C2110H1", "sa", "1234$");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }

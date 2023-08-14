@@ -16,7 +16,8 @@ public class PlayerDAOImpl implements PlayerDAO {
 
         conn = DBUtility.openConnection();
         try {
-            ps = conn.prepareStatement("insert into tbl_players values (?,?,?,?,?,?,?)");
+            String sql = "insert into tbl_players values (?,?,?,?,?,?,?)";
+            ps = conn.prepareStatement(sql);
             ps.setString(1, player.getPlayerName());
             ps.setBoolean(2, player.getGender());
             ps.setDate(3, new Date(player.getDateOfBirth().getTime()));
@@ -26,8 +27,7 @@ public class PlayerDAOImpl implements PlayerDAO {
             ps.setFloat(7, player.getTransferCost());
             int i = ps.executeUpdate();
 
-            if (i > 0)
-                bool = true;
+            if (i > 0) bool = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -46,7 +46,8 @@ public class PlayerDAOImpl implements PlayerDAO {
 
         conn = DBUtility.openConnection();
         try {
-            ps = conn.prepareStatement("select * from tbl_players");
+            String sql = "select * from tbl_players";
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Player player = new Player();
@@ -78,7 +79,8 @@ public class PlayerDAOImpl implements PlayerDAO {
 
         conn = DBUtility.openConnection();
         try {
-            ps = conn.prepareStatement("select * from tbl_players where playerId = ?");
+            String sql = "select * from tbl_players where playerId = ?";
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -107,7 +109,9 @@ public class PlayerDAOImpl implements PlayerDAO {
 
         conn = DBUtility.openConnection();
         try {
-            ps = conn.prepareStatement("update tbl_players set playerName = ?, gender = ?, dateOfBirth = ?, nationality = ?, clubName = ?, positionPlay = ?, transferCost = ? where playerId = ?");
+            String sql = "update tbl_players set playerName = ?, gender = ?, dateOfBirth = ?, nationality = ?," +
+                    " clubName = ?, positionPlay = ?, transferCost = ? where playerId = ?";
+            ps = conn.prepareStatement(sql);
             ps.setString(1, player.getPlayerName());
             ps.setBoolean(2, player.getGender());
             ps.setDate(3, new Date(player.getDateOfBirth().getTime()));
@@ -118,8 +122,7 @@ public class PlayerDAOImpl implements PlayerDAO {
             ps.setInt(8, id);
             int i = ps.executeUpdate();
 
-            if (i > 0)
-                bool = true;
+            if (i > 0) bool = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -136,12 +139,12 @@ public class PlayerDAOImpl implements PlayerDAO {
 
         conn = DBUtility.openConnection();
         try {
-            ps = conn.prepareStatement("delete from tbl_players where playerId = ?");
+            String sql = "delete from tbl_players where playerId = ?";
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             int i = ps.executeUpdate();
 
-            if (i > 0)
-                bool = true;
+            if (i > 0) bool = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
